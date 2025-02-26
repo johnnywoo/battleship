@@ -8,7 +8,7 @@ if (is_file(__DIR__ . $_SERVER['REQUEST_URI'])) {
 require_once __DIR__ . '/../vendor/autoload.php';
 
 // http://127.0.0.1/api/a1a2a3a4 => {"is_valid":false}
-if (substr($_SERVER['REQUEST_URI'], 0, 5) == '/api/') {
+if (str_starts_with($_SERVER['REQUEST_URI'], '/api/')) {
     $board = new Board();
 
     $spec = substr($_SERVER['REQUEST_URI'], 5);

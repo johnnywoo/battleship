@@ -1,7 +1,7 @@
 <?php
 
 class BattleshipTest extends \PHPUnit\Framework\TestCase {
-    public function testEmptyBoard() {
+    public function testEmptyBoard(): void {
         //   1234567890
         // a           |
         // b           |
@@ -13,10 +13,10 @@ class BattleshipTest extends \PHPUnit\Framework\TestCase {
         // h           |
         // i           |
         // j           |
-        $this->assertSame(false, $this->getApiResponse('')['is_valid']);
+        self::assertFalse($this->getApiResponse('')['is_valid']);
     }
 
-    public function testOneShip() {
+    public function testOneShip(): void {
         //   1234567890
         // a *         |
         // b           |
@@ -28,10 +28,10 @@ class BattleshipTest extends \PHPUnit\Framework\TestCase {
         // h           |
         // i           |
         // j           |
-        $this->assertSame(false, $this->getApiResponse('a1')['is_valid']);
+        self::assertFalse($this->getApiResponse('a1')['is_valid']);
     }
 
-    public function testTwoShips() {
+    public function testTwoShips(): void {
         //   1234567890
         // a * *       |
         // b           |
@@ -43,10 +43,10 @@ class BattleshipTest extends \PHPUnit\Framework\TestCase {
         // h           |
         // i           |
         // j           |
-        $this->assertSame(false, $this->getApiResponse('a1 a3')['is_valid']);
+        self::assertFalse($this->getApiResponse('a1 a3')['is_valid']);
     }
 
-    public function testThreeShips() {
+    public function testThreeShips(): void {
         //   1234567890
         // a * * *     |
         // b           |
@@ -58,10 +58,10 @@ class BattleshipTest extends \PHPUnit\Framework\TestCase {
         // h           |
         // i           |
         // j           |
-        $this->assertSame(false, $this->getApiResponse('a1 a3 a5')['is_valid']);
+        self::assertFalse($this->getApiResponse('a1 a3 a5')['is_valid']);
     }
 
-    public function testFourShips() {
+    public function testFourShips(): void {
         //   1234567890
         // a * * * *   |
         // b           |
@@ -73,10 +73,10 @@ class BattleshipTest extends \PHPUnit\Framework\TestCase {
         // h           |
         // i           |
         // j           |
-        $this->assertSame(true, $this->getApiResponse('a1 a3 a5 a7')['is_valid']);
+        self::assertTrue($this->getApiResponse('a1 a3 a5 a7')['is_valid']);
     }
 
-    public function testFourShipsAlternative() {
+    public function testFourShipsAlternative(): void {
         //   1234567890
         // a * * * *   |
         // b           |
@@ -88,10 +88,10 @@ class BattleshipTest extends \PHPUnit\Framework\TestCase {
         // h           |
         // i           |
         // j           |
-        $this->assertSame(true, $this->getApiResponse('a5a3a1a7')['is_valid']);
+        self::assertTrue($this->getApiResponse('a5a3a1a7')['is_valid']);
     }
 
-    public function testFiveShips() {
+    public function testFiveShips(): void {
         //   1234567890
         // a * * * * * |
         // b           |
@@ -103,10 +103,10 @@ class BattleshipTest extends \PHPUnit\Framework\TestCase {
         // h           |
         // i           |
         // j           |
-        $this->assertSame(false, $this->getApiResponse('a1 a3 a5 a7 a9')['is_valid']);
+        self::assertFalse($this->getApiResponse('a1 a3 a5 a7 a9')['is_valid']);
     }
 
-    public function testLargeShipsBad() {
+    public function testLargeShipsBad(): void {
         //   1234567890
         // a ##        |
         // b           |
@@ -118,10 +118,10 @@ class BattleshipTest extends \PHPUnit\Framework\TestCase {
         // h           |
         // i           |
         // j           |
-        $this->assertSame(false, $this->getApiResponse('a1a2 c3c4')['is_valid']);
+        self::assertFalse($this->getApiResponse('a1a2 c3c4')['is_valid']);
     }
 
-    public function testOneLargeShipGoodHorizontal() {
+    public function testOneLargeShipGoodHorizontal(): void {
         //   1234567890
         // a ##        |
         // b       *   |
@@ -133,10 +133,10 @@ class BattleshipTest extends \PHPUnit\Framework\TestCase {
         // h           |
         // i           |
         // j           |
-        $this->assertSame(true, $this->getApiResponse('a1a2 b7 c4 e5')['is_valid']);
+        self::assertTrue($this->getApiResponse('a1a2 b7 c4 e5')['is_valid']);
     }
 
-    public function testOneLargeShipGoodVertical() {
+    public function testOneLargeShipGoodVertical(): void {
         //   1234567890
         // a #         |
         // b # *       |
@@ -148,10 +148,10 @@ class BattleshipTest extends \PHPUnit\Framework\TestCase {
         // h           |
         // i           |
         // j           |
-        $this->assertSame(true, $this->getApiResponse('a1b1 b3 f2 d5')['is_valid']);
+        self::assertTrue($this->getApiResponse('a1b1 b3 f2 d5')['is_valid']);
     }
 
-    public function testTwoLargeShips() {
+    public function testTwoLargeShips(): void {
         //   1234567890
         // a ##        |
         // b     *     |
@@ -163,10 +163,10 @@ class BattleshipTest extends \PHPUnit\Framework\TestCase {
         // h           |
         // i           |
         // j           |
-        $this->assertSame(true, $this->getApiResponse('a1a2 b5 c3 d5e5')['is_valid']);
+        self::assertTrue($this->getApiResponse('a1a2 b5 c3 d5e5')['is_valid']);
     }
 
-    public function testThreeLargeShips() {
+    public function testThreeLargeShips(): void {
         //   1234567890
         // a           |
         // b    ##     |
@@ -178,10 +178,10 @@ class BattleshipTest extends \PHPUnit\Framework\TestCase {
         // h           |
         // i           |
         // j          *|
-        $this->assertSame(true, $this->getApiResponse('b5b4 d1c1 e7f7 j10')['is_valid']);
+        self::assertTrue($this->getApiResponse('b5b4 d1c1 e7f7 j10')['is_valid']);
     }
 
-    public function testFourLargeShips() {
+    public function testFourLargeShips(): void {
         //   1234567890
         // a ##        |
         // b           |
@@ -193,10 +193,10 @@ class BattleshipTest extends \PHPUnit\Framework\TestCase {
         // h           |
         // i         ##|
         // j           |
-        $this->assertSame(true, $this->getApiResponse('a1a2 c3c4 e7f7 i9i10')['is_valid']);
+        self::assertTrue($this->getApiResponse('a1a2 c3c4 e7f7 i9i10')['is_valid']);
     }
 
-    public function testFiveLargeShips() {
+    public function testFiveLargeShips(): void {
         //   1234567890
         // a        ## |
         // b   ##      |
@@ -208,10 +208,10 @@ class BattleshipTest extends \PHPUnit\Framework\TestCase {
         // h           |
         // i         ##|
         // j           |
-        $this->assertSame(false, $this->getApiResponse('a8a9 b3b4 d3d4 e7f7 i9i10')['is_valid']);
+        self::assertFalse($this->getApiResponse('a8a9 b3b4 d3d4 e7f7 i9i10')['is_valid']);
     }
 
-    public function testSpacedShips() {
+    public function testSpacedShips(): void {
         //   1234567890
         // a # #       |
         // b     # #   |
@@ -223,10 +223,10 @@ class BattleshipTest extends \PHPUnit\Framework\TestCase {
         // h           |
         // i        # #|
         // j           |
-        $this->assertSame(false, $this->getApiResponse('a1 a3 b5 b7 e7 g7 i8 i10')['is_valid']);
+        self::assertFalse($this->getApiResponse('a1 a3 b5 b7 e7 g7 i8 i10')['is_valid']);
     }
 
-    public function testBrokenShips() {
+    public function testBrokenShips(): void {
         //   1234567890
         // a           |
         // b           |
@@ -238,7 +238,7 @@ class BattleshipTest extends \PHPUnit\Framework\TestCase {
         // h           |
         // i           |
         // j           |
-        $this->assertSame(false, $this->getApiResponse('c3c4d3e5')['is_valid']);
+        self::assertFalse($this->getApiResponse('c3c4d3e5')['is_valid']);
     }
 
 
@@ -246,13 +246,16 @@ class BattleshipTest extends \PHPUnit\Framework\TestCase {
     // INTERNALS
     //
 
-    const PIDFILE = '/tmp/battleship.pid';
+    private static ?string $apiBaseUrl = null;
 
-    private static $apiBaseUrl = '';
+    private static function getPidFile(): string
+    {
+        return sys_get_temp_dir() . '/battleship.pid';
+    }
 
-    public static function setUpBeforeClass() {
-        $apiUrlFromEnv = self::$apiBaseUrl = trim(getenv('BSAPI'), '/');
-        if ($apiUrlFromEnv && !preg_match('#://#', $apiUrlFromEnv)) {
+    public static function setUpBeforeClass(): void {
+        $apiUrlFromEnv = trim(getenv('BSAPI'), '/');
+        if ($apiUrlFromEnv && !str_contains($apiUrlFromEnv, '://')) {
             $apiUrlFromEnv = 'http://' . $apiUrlFromEnv;
         }
         if ($apiUrlFromEnv) {
@@ -261,18 +264,22 @@ class BattleshipTest extends \PHPUnit\Framework\TestCase {
             return;
         }
 
-
         fwrite(STDERR, "Trying to start an API server...\n");
         $server = '127.0.0.1:32167';
         self::$apiBaseUrl = 'http://' . $server;
 
         self::removeDevServer();
 
-        exec('php -S ' . $server . ' -t ' . __DIR__ . '/../www >/dev/null 2>&1 & echo $! >> ' . escapeshellarg(self::PIDFILE), $out, $err);
+        $pidFile = self::getPidFile();
+        exec(
+            'php -S ' . escapeshellarg($server)
+                . ' -t ' . escapeshellarg(__DIR__ . '/../www')
+                . ' >/dev/null 2>&1 & echo $! >> ' . escapeshellarg($pidFile),
+        );
         // надо подождать немного, пока сервер инициализируется
         usleep(250000);
         fwrite(STDERR, "Started development server at " . self::$apiBaseUrl . "\n");
-        fwrite(STDERR, "PID " . trim(file_get_contents(self::PIDFILE)) . "\n");
+        fwrite(STDERR, "PID " . trim(file_get_contents($pidFile)) . "\n");
 
         $curl = curl_init(self::$apiBaseUrl);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -285,30 +292,31 @@ class BattleshipTest extends \PHPUnit\Framework\TestCase {
         }
     }
 
-    public static function tearDownAfterClass() {
+    public static function tearDownAfterClass(): void {
         self::removeDevServer();
     }
 
-    private static function removeDevServer() {
-        if (file_exists(self::PIDFILE)) {
-            $pid = trim(file_get_contents(self::PIDFILE));
+    private static function removeDevServer(): void {
+        $pidFile = self::getPidFile();
+        if (file_exists($pidFile)) {
+            $pid = trim(file_get_contents($pidFile));
             if ($pid) {
                 exec('kill ' . escapeshellarg($pid));
             }
-            unlink(self::PIDFILE);
+            unlink($pidFile);
         }
     }
 
-    private function getApiResponse($queryString) {
+    private function getApiResponse($queryString): array {
         $curl = curl_init(self::$apiBaseUrl . '/api/' . urlencode($queryString));
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
         $body   = curl_exec($curl);
         $status = curl_getinfo($curl)['http_code'];
 
-        $this->assertEquals(200, $status);
+        self::assertEquals(200, $status);
         $data = json_decode($body, true);
-        $this->assertArrayHasKey('is_valid', $data);
+        self::assertArrayHasKey('is_valid', $data);
 
         return $data;
     }
